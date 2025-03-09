@@ -195,7 +195,11 @@ fun listEmptyCages(cageList: List<String>) {
  */
 fun listAllMonkeysAndCages(cageList: List<String>) {
     println("MONKEYS & CAGES")
-    start here next lesson
+    for ((index, monkey) in cageList.withIndex()) {
+        if (monkey != EMPTY) {
+            println("- $monkey (Cage ${index + 1})")
+        }
+    }
 }
 
 
@@ -203,8 +207,7 @@ fun listAllMonkeysAndCages(cageList: List<String>) {
  * Returns the number of monkeys found in the given cage list
  */
 fun monkeyCount(cageList: List<String>): Int {
-
-    return 0    // REPLACE THIS WITH YOUR CODE!
+    return cageList.count { it != EMPTY }
 }
 
 
@@ -212,8 +215,7 @@ fun monkeyCount(cageList: List<String>): Int {
  * Returns the number of cages that are empty in the given cage list
  */
 fun emptyCount(cageList: List<String>): Int {
-
-    return 0    // REPLACE THIS WITH YOUR CODE!
+    return cageList.count { it == EMPTY }
 }
 
 
@@ -230,7 +232,16 @@ fun emptyCount(cageList: List<String>): Int {
  */
 fun showMonkeyCages(cageList: List<String>) {
 
-    check(false)    // REPLACE THIS WITH YOUR CODE!
+    // Printing the cage numbers
+    val cageNum = cageList.indices.joinToString { "Cage ${it + 1}".padEnd(8) } // prints the cage number 8 times
+    println("+--------+".repeat(cageList.size))  // will repeat +--------+ for the amount of cages
+    println("| $cageNum |") // prints cage number with | | around it
+    println("+--------+".repeat(cageList.size)) // will repeat +--------+ for the amount of cages
+
+    // Print the monkey to its cage or have --- if it's empty
+    val monkey = cageList.joinToString { it.padEnd(8) } // padEnd will print the monkeys 8 times
+    println("| $monkey |")  // prints the monkey with | | around it
+    println("+--------+".repeat(cageList.size)) // will repeat +--------+ for the amount of cages
 }
 
 
@@ -239,8 +250,7 @@ fun showMonkeyCages(cageList: List<String>) {
  */
 fun clearCage(cageList: MutableList<String>, cageNum: Int) {
     println("--- Clearing cage $cageNum")
-
-    check(false)    // REPLACE THIS WITH YOUR CODE!
+    cageList[cageNum-1] = EMPTY
 }
 
 
@@ -252,8 +262,9 @@ fun clearCage(cageList: MutableList<String>, cageNum: Int) {
  */
 fun swapCages(cageList: MutableList<String>, cageNum1: Int, cageNum2: Int) {
     println("<-> Swapping cages $cageNum1 and $cageNum2")
-
-    check(false)    // REPLACE THIS WITH YOUR CODE!
+    val swappedMonkey = cageList[cageNum2]
+    cageList[cageNum2] = cageList[cageNum1]
+    cageList[cageNum1] = swappedMonkey
 }
 
 
